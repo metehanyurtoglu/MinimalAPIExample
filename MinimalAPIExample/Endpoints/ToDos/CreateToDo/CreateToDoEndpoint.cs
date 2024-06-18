@@ -17,7 +17,7 @@ namespace MinimalAPIExample.Endpoints.ToDos.CreateToDo
 
                 await context.SaveChangesAsync();
 
-                var response = new CreateToDoResponse(newToDoItem.Id);
+                var response = newToDoItem.Adapt<CreateToDoResponse>();
 
                 return Results.Created($"/todoitems/{response.Id}", response);
             });

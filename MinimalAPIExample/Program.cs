@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 {
-    //app.UseHealthChecks();
+    app.MapHealthChecks("/health");
     app.MapEndpoints();
     app.Run();
 }
