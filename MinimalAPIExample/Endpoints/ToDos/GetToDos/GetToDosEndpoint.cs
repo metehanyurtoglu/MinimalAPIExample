@@ -1,15 +1,20 @@
 ﻿
+using Carter;
 using Mapster;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MinimalAPIExample.Core;
 using MinimalAPIExample.Endpoints.ToDos.GetToDo;
 
 namespace MinimalAPIExample.Endpoints.ToDos.GetToDos
 {
-    public class GetToDosEndpoint : IEndpoint
+    public record GetToDosRequest([FromQuery] int Page = 1, [FromQuery] int Size = 10);
+    public record GetToDosResponse(List<GetToDoResponse> ToDos);
+
+    public class GetToDosEndpoint : ICarterModule
     {
-        public void MapEndpoint(IEndpointRouteBuilder app)
+        public void AddRoutes(IEndpointRouteBuilder app)
         {
             app.MapGet($"/todoitems", async ([AsParameters] GetToDosRequest request, ApplicationContext context) =>
             {

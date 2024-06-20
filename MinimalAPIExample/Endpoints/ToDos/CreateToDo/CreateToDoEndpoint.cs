@@ -1,13 +1,18 @@
-﻿using Mapster;
+﻿using Carter;
+using Mapster;
 using MinimalAPIExample.Core;
 using MinimalAPIExample.Core.Entities;
 using MinimalAPIExample.Endpoints.ToDos.CreateToDo;
 
 namespace MinimalAPIExample.Endpoints.ToDos.CreateToDo
 {
-    public class CreateToDoEndpoint : IEndpoint
+    public record CreateToDoRequest(string ToDo);
+    public record CreateToDoResponse(int Id);
+
+
+    public class CreateToDoEndpoint : ICarterModule
     {
-        public void MapEndpoint(IEndpointRouteBuilder app)
+        public void AddRoutes(IEndpointRouteBuilder app)
         {
             app.MapPost("/todoitems", async (CreateToDoRequest request, ApplicationContext context) =>
             {

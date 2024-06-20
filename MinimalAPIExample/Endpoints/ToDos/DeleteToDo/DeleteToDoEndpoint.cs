@@ -1,12 +1,13 @@
 ﻿
+using Carter;
 using MinimalAPIExample.Core;
 using MinimalAPIExample.Core.Entities;
 
 namespace MinimalAPIExample.Endpoints.ToDos.DeleteToDo
 {
-    public class DeleteToDoEndpoint : IEndpoint
+    public class DeleteToDoEndpoint : ICarterModule
     {
-        public void MapEndpoint(IEndpointRouteBuilder app)
+        public void AddRoutes(IEndpointRouteBuilder app)
         {
             app.MapDelete("/todoitems/{id}", async (int id, ApplicationContext context) =>
             {
