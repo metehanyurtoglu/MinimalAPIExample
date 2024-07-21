@@ -1,10 +1,9 @@
-﻿
-using Carter;
+﻿using Carter;
 using Mapster;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MinimalAPIExample.Core;
+using MinimalAPIExample.Endpoints.ToDos.CreateToDo;
 using MinimalAPIExample.Endpoints.ToDos.GetToDo;
 
 namespace MinimalAPIExample.Endpoints.ToDos.GetToDos
@@ -23,7 +22,12 @@ namespace MinimalAPIExample.Endpoints.ToDos.GetToDos
                 var todos = await context.ToDos.Skip(skip).Take(request.Size).ToListAsync();
 
                 return Results.Ok(new GetToDosResponse(todos.Adapt<List<GetToDoResponse>>()));
-            });
+            })
+            .WithName("GetToDos")
+            .Produces<CreateToDoResponse>(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .WithSummary("Get ToDos")
+            .WithDescription("Gets ToDos");
         }
     }
 }

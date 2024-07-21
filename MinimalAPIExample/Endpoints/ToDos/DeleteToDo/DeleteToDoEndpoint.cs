@@ -1,7 +1,7 @@
-﻿
-using Carter;
+﻿using Carter;
 using MinimalAPIExample.Core;
 using MinimalAPIExample.Core.Entities;
+using MinimalAPIExample.Endpoints.ToDos.CreateToDo;
 
 namespace MinimalAPIExample.Endpoints.ToDos.DeleteToDo
 {
@@ -20,7 +20,12 @@ namespace MinimalAPIExample.Endpoints.ToDos.DeleteToDo
                 }
 
                 return Results.NotFound();
-            });
+            })
+            .WithName("DeleteToDo")
+            .Produces<CreateToDoResponse>(StatusCodes.Status204NoContent)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .WithSummary("Delete ToDo")
+            .WithDescription("Deletes ToDo");
         }
     }
 }

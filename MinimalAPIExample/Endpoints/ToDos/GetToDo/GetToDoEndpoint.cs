@@ -1,7 +1,7 @@
-﻿
-using Carter;
+﻿using Carter;
 using Mapster;
 using MinimalAPIExample.Core;
+using MinimalAPIExample.Endpoints.ToDos.CreateToDo;
 
 namespace MinimalAPIExample.Endpoints.ToDos.GetToDo
 {
@@ -21,7 +21,12 @@ namespace MinimalAPIExample.Endpoints.ToDos.GetToDo
                 }
 
                 return Results.Ok(toDo.Adapt<GetToDoResponse>());
-            });
+            })
+            .WithName("GetToDo")
+            .Produces<CreateToDoResponse>(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .WithSummary("Get ToDo")
+            .WithDescription("Gets ToDo");
         }
     }
 }
